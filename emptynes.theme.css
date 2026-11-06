@@ -1,0 +1,572 @@
+/**
+ * @name Emptynes
+ * @author emptynes4s
+ * @version 1.0.0
+ * @description Full Discord theme with custom background and Chewy font
+ * @source https://github.com/emptynes4s/theme
+ */
+
+/* ============ ASSETS ============ */
+@font-face {
+  font-family: "Chewy";
+  src: url("https://raw.githubusercontent.com/emptynes4s/theme/main/Chewy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============ EASY SETTINGS (edit these) ============ */
+:root {
+  --bg-image: url("https://raw.githubusercontent.com/emptynes4s/theme/main/129961812_p1_master1200.jpg");
+  --bg-blur: 6px;            /* blur of the wallpaper */
+  --bg-dim: 0.55;            /* 0 = bright, 1 = fully dark */
+
+  --accent: #ff8fb8;         /* main accent colour */
+  --accent-2: #b48cff;       /* secondary accent */
+  --accent-rgb: 255, 143, 184;
+
+  --panel-1: rgba(20, 16, 28, 0.62);   /* sidebars, channel list */
+  --panel-2: rgba(28, 22, 38, 0.55);   /* chat area */
+  --panel-3: rgba(14, 11, 20, 0.78);   /* servers rail, titlebar */
+  --panel-input: rgba(40, 32, 54, 0.75);
+  --hover: rgba(var(--accent-rgb), 0.12);
+  --selected: rgba(var(--accent-rgb), 0.22);
+
+  --text: #f4eefc;
+  --text-muted: #b9aecb;
+  --radius: 14px;
+  --font-main: "Chewy", "gg sans", "Noto Sans", sans-serif;
+}
+
+/* ============ GLOBAL FONT ============ */
+body,
+button,
+input,
+textarea,
+select,
+[class*="title_"],
+[class*="name_"],
+[class*="username_"],
+[class*="channelName"],
+[class*="markup_"],
+[class*="header_"] {
+  font-family: var(--font-main) !important;
+  letter-spacing: 0.2px;
+}
+
+code, pre, [class*="codeLine"], [class*="hljs"] {
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+/* ============ DISCORD VARIABLE OVERRIDES ============ */
+.theme-dark,
+.theme-light,
+.theme-darker,
+.theme-midnight {
+  --background-primary: transparent;
+  --background-secondary: var(--panel-1);
+  --background-secondary-alt: var(--panel-1);
+  --background-tertiary: var(--panel-3);
+  --background-floating: rgba(22, 17, 32, 0.95);
+  --background-accent: var(--selected);
+  --background-mobile-primary: var(--panel-2);
+  --background-mobile-secondary: var(--panel-1);
+  --background-modifier-hover: var(--hover);
+  --background-modifier-selected: var(--selected);
+  --background-modifier-active: rgba(var(--accent-rgb), 0.3);
+  --background-modifier-accent: rgba(255, 255, 255, 0.08);
+  --channeltextarea-background: var(--panel-input);
+  --chat-background: transparent;
+  --deprecated-store-bg: var(--panel-1);
+  --deprecated-card-bg: var(--panel-1);
+  --deprecated-quickswitcher-input-background: var(--panel-input);
+
+  --bg-base-primary: transparent;
+  --bg-base-secondary: var(--panel-1);
+  --bg-base-tertiary: var(--panel-3);
+  --bg-surface-overlay: rgba(22, 17, 32, 0.95);
+  --bg-surface-raised: var(--panel-1);
+
+  --text-normal: var(--text);
+  --text-default: var(--text);
+  --text-muted: var(--text-muted);
+  --header-primary: #ffffff;
+  --header-secondary: var(--text-muted);
+  --interactive-normal: var(--text-muted);
+  --interactive-hover: #ffffff;
+  --interactive-active: var(--accent);
+  --interactive-muted: rgba(255, 255, 255, 0.3);
+  --text-link: var(--accent);
+  --text-brand: var(--accent);
+
+  --brand-experiment: var(--accent);
+  --brand-experiment-560: var(--accent);
+  --brand-500: var(--accent);
+  --brand-560: var(--accent-2);
+  --brand-360: var(--accent);
+  --brand-400: var(--accent);
+  --focus-primary: var(--accent);
+  --scrollbar-thin-thumb: rgba(var(--accent-rgb), 0.5);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: rgba(var(--accent-rgb), 0.5);
+  --scrollbar-auto-track: transparent;
+  --scrollbar-auto-scrollbar-color-thumb: rgba(var(--accent-rgb), 0.5);
+  --scrollbar-auto-scrollbar-color-track: transparent;
+}
+
+/* ============ WALLPAPER ============ */
+html, body {
+  background: #0d0a14 !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20px;
+  z-index: -2;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(var(--bg-blur));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 6, 18, var(--bg-dim)),
+    rgba(30, 14, 40, calc(var(--bg-dim) - 0.1))
+  );
+  pointer-events: none;
+}
+
+#app-mount,
+[class*="appMount"],
+[class*="app_"],
+[class*="appAsidePanelWrapper"],
+[class*="bg_"],
+[class*="base_"],
+[class*="content_"][class*="flex"],
+[class*="notAppAsidePanel"] {
+  background: transparent !important;
+}
+
+/* ============ TITLEBAR ============ */
+[class*="titleBar_"],
+[class*="bar_"][class*="titleBar"],
+[class*="typeWindows"] {
+  background: var(--panel-3) !important;
+}
+
+/* ============ SERVER LIST ============ */
+nav[class*="wrapper_"],
+[class*="guilds_"],
+[class*="scroller_"][class*="guilds"],
+ul[class*="tree_"] {
+  background: var(--panel-3) !important;
+  backdrop-filter: blur(14px);
+}
+
+[class*="wrapper_"] [class*="icon_"],
+[class*="listItem_"] [class*="icon_"] {
+  transition: border-radius 0.25s ease, transform 0.2s ease;
+}
+
+[class*="listItem_"]:hover [class*="icon_"],
+[class*="listItem_"]:hover [class*="wrapper_"] {
+  transform: scale(1.08);
+}
+
+[class*="pill_"] span,
+[class*="item_"][class*="pill"] {
+  background: var(--accent) !important;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* ============ CHANNEL LIST / SIDEBAR ============ */
+[class*="sidebar_"],
+[class*="sidebarList"],
+[class*="privateChannels"],
+[class*="container_"][class*="sidebar"],
+[class*="sidebarRegion"] {
+  background: var(--panel-1) !important;
+  backdrop-filter: blur(16px);
+  border-top-left-radius: var(--radius);
+}
+
+[class*="sidebar_"] > [class*="container_"],
+[class*="sidebar_"] header,
+[class*="header_"][class*="bannerVisible"],
+[class*="container_"] > [class*="header_"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.18) !important;
+}
+
+[class*="channel_"] [class*="name_"],
+[class*="channel_"] [class*="channelName_"] {
+  font-size: 15px;
+}
+
+[class*="containerDefault_"] [class*="iconVisibility"],
+li[class*="channel_"] > div[class*="interactive"],
+[class*="wrapper_"][class*="modeSelected"] {
+  border-radius: 10px !important;
+}
+
+[class*="modeSelected_"],
+[class*="selected_"][class*="wrapper"] {
+  background: var(--selected) !important;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+[class*="modeUnread"]::before,
+[class*="unread_"] {
+  background: var(--accent) !important;
+}
+
+/* ============ USER PANEL (bottom left) ============ */
+section[class*="panels_"],
+[class*="panels_"] {
+  background: var(--panel-3) !important;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  border-radius: var(--radius);
+  margin: 6px;
+}
+
+[class*="container_"][class*="avatar"] {
+  background: transparent !important;
+}
+
+/* ============ CHAT AREA ============ */
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="content_"] > [class*="chat_"],
+main[class*="chatContent"] {
+  background: var(--panel-2) !important;
+  backdrop-filter: blur(10px);
+}
+
+[class*="title_"][class*="container"],
+section[class*="title_"],
+[class*="toolbar_"] {
+  background: rgba(20, 15, 30, 0.55) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(var(--accent-rgb), 0.2) !important;
+}
+
+/* messages */
+[class*="message_"] {
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+
+[class*="message_"]:hover {
+  background: rgba(var(--accent-rgb), 0.06) !important;
+}
+
+[class*="mentioned_"] {
+  background: rgba(var(--accent-rgb), 0.12) !important;
+  box-shadow: inset 3px 0 0 var(--accent) !important;
+}
+
+[class*="username_"] {
+  font-size: 16px;
+}
+
+[class*="timestamp_"] {
+  color: var(--text-muted) !important;
+}
+
+/* avatars */
+[class*="avatar_"] img,
+img[class*="avatar"] {
+  border-radius: 50% !important;
+}
+
+/* divider / new messages bar */
+[class*="isUnread"] [class*="divider"],
+[class*="divider_"][class*="isUnread"] {
+  border-color: var(--accent) !important;
+}
+
+[class*="unreadPill"],
+[class*="newMessagesBar"] {
+  background: var(--accent) !important;
+  color: #1a0f22 !important;
+  border-radius: 999px;
+}
+
+/* embeds, quotes, blockquote */
+[class*="embedWrapper_"],
+[class*="embedFull_"] {
+  background: rgba(30, 22, 44, 0.7) !important;
+  border-radius: var(--radius) !important;
+  border-color: rgba(var(--accent-rgb), 0.35) !important;
+}
+
+blockquote [class*="blockquoteDivider"],
+[class*="blockquoteContainer"] > div:first-child {
+  background: var(--accent) !important;
+}
+
+/* code blocks */
+pre code,
+[class*="markup_"] pre {
+  background: rgba(10, 7, 16, 0.85) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.25) !important;
+  border-radius: 10px !important;
+}
+
+/* ============ CHAT INPUT ============ */
+[class*="channelTextArea_"],
+[class*="scrollableContainer_"] {
+  background: var(--panel-input) !important;
+  border-radius: var(--radius) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+[class*="channelTextArea_"]:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.3);
+}
+
+[class*="form_"] {
+  background: transparent !important;
+}
+
+[class*="textArea_"],
+[class*="slateTextArea"] {
+  font-family: var(--font-main) !important;
+  font-size: 16px;
+}
+
+/* ============ MEMBER LIST ============ */
+[class*="membersWrap_"],
+[class*="members_"],
+nav[class*="members"] {
+  background: var(--panel-1) !important;
+  backdrop-filter: blur(16px);
+}
+
+[class*="member_"] {
+  border-radius: 10px !important;
+}
+
+[class*="member_"]:hover {
+  background: var(--hover) !important;
+}
+
+[class*="membersGroup_"] {
+  color: var(--accent) !important;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* ============ USER PROFILE SIDEBAR / POPOUTS ============ */
+[class*="userPanelOuter"],
+[class*="outer_"][class*="user"],
+[class*="popout_"],
+[class*="userPopoutOuter"],
+[class*="userProfileOuter"],
+[class*="userProfileModalOverlay"] {
+  background: rgba(22, 16, 34, 0.9) !important;
+  backdrop-filter: blur(18px);
+  border-radius: var(--radius) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+}
+
+[class*="userPopoutInner"],
+[class*="userProfileInner"],
+[class*="inner_"][class*="user"] {
+  background: rgba(30, 22, 44, 0.7) !important;
+}
+
+/* ============ MODALS / SETTINGS ============ */
+[class*="layer_"][class*="baseLayer"],
+[class*="standardSidebarView"],
+[class*="sidebarRegionScroller"],
+[class*="contentRegion"],
+[class*="contentRegionScroller"],
+[class*="contentColumn"],
+[class*="contentRegionShadow"] {
+  background: var(--panel-2) !important;
+  backdrop-filter: blur(16px);
+}
+
+[class*="sidebarRegion_"] {
+  background: var(--panel-1) !important;
+}
+
+[class*="root_"][class*="modal"],
+[class*="modal_"][class*="root"],
+[class*="focusLock"] > [class*="root_"] {
+  background: rgba(22, 17, 32, 0.95) !important;
+  border-radius: var(--radius) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+}
+
+[class*="backdrop_"] {
+  background: rgba(5, 3, 10, 0.6) !important;
+  backdrop-filter: blur(6px);
+}
+
+/* ============ MENUS / TOOLTIPS ============ */
+[class*="menu_"],
+[class*="contextMenu"] {
+  background: rgba(22, 17, 32, 0.96) !important;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(var(--accent-rgb), 0.25) !important;
+  border-radius: var(--radius) !important;
+}
+
+[class*="item_"][class*="focused"],
+[class*="item_"]:hover {
+  background: var(--selected) !important;
+  border-radius: 8px;
+}
+
+[class*="tooltip_"] {
+  background: rgba(14, 10, 22, 0.96) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 10px !important;
+}
+
+[class*="tooltipPointer"] {
+  border-top-color: rgba(14, 10, 22, 0.96) !important;
+}
+
+/* quick switcher + search */
+[class*="quickswitcher"],
+[class*="searchBar_"],
+[class*="search_"] {
+  background: var(--panel-input) !important;
+  border-radius: 12px !important;
+}
+
+[class*="searchResultsWrap"],
+[class*="searchResults_"] {
+  background: rgba(22, 17, 32, 0.95) !important;
+  backdrop-filter: blur(14px);
+}
+
+/* ============ BUTTONS ============ */
+[class*="lookFilled"][class*="colorBrand"],
+[class*="button_"][class*="colorBrand"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+  color: #1a0f22 !important;
+  border-radius: 12px !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+[class*="lookFilled"][class*="colorBrand"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.45);
+}
+
+[class*="lookFilled"][class*="colorPrimary"],
+[class*="lookFilled"][class*="colorGrey"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+}
+
+/* toggles */
+[class*="container_"][class*="checked"] svg,
+[class*="switch_"][class*="checked"] {
+  background-color: var(--accent) !important;
+}
+
+/* inputs */
+input[class*="inputDefault"],
+[class*="input_"][class*="inputDefault"],
+[class*="inputWrapper"] input,
+textarea[class*="textarea"] {
+  background: var(--panel-input) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.2) !important;
+  border-radius: 10px !important;
+  color: var(--text) !important;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  outline: none !important;
+}
+
+/* ============ BADGES / STATUS ============ */
+[class*="numberBadge"],
+[class*="mentionsBadge"],
+[class*="lowerBadge"] {
+  background: var(--accent) !important;
+  color: #1a0f22 !important;
+}
+
+[class*="selection_"],
+::selection {
+  background: rgba(var(--accent-rgb), 0.45) !important;
+  color: #fff;
+}
+
+/* ============ SCROLLBARS ============ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+  border: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-2)) !important;
+  border-radius: 999px;
+  border: none !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* ============ VOICE / CALLS ============ */
+[class*="voiceCallWrapper"],
+[class*="callContainer"],
+[class*="root_"][class*="voice"],
+[class*="wrapper_"][class*="videoWrapper"] {
+  background: rgba(14, 10, 22, 0.75) !important;
+  border-radius: var(--radius);
+}
+
+[class*="speaking_"],
+[class*="avatarSpeaking"] {
+  box-shadow: 0 0 0 3px var(--accent) !important;
+}
+
+/* ============ VENCORD EXTRAS ============ */
+.vc-settings-card,
+[class*="vc-"][class*="card"] {
+  background: rgba(30, 22, 44, 0.7) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.2) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* ============ SMALL POLISH ============ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+a {
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-2) !important;
+}
