@@ -1,0 +1,117 @@
+/**
+ * @name Chewy Wallpaper
+ * @author ChatGPT
+ * @version 1.0.0
+ * @description A playful Discord theme using the supplied wallpaper and Chewy font.
+ */
+
+/* Assets from the GitHub repository supplied by the user. */
+@font-face {
+  font-family: "Chewy";
+  src: url("https://raw.githubusercontent.com/emptynes4s/theme/main/Chewy-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --chewy-wallpaper: url("https://raw.githubusercontent.com/emptynes4s/theme/main/129961812_p1_master1200.jpg");
+  --chewy-font: "Chewy", "gg sans", "Noto Sans", sans-serif;
+
+  --background-primary: rgba(20, 16, 27, 0.76);
+  --background-secondary: rgba(27, 21, 36, 0.82);
+  --background-secondary-alt: rgba(35, 26, 45, 0.82);
+  --background-tertiary: rgba(15, 12, 22, 0.88);
+  --background-floating: rgba(28, 21, 37, 0.96);
+  --channeltextarea-background: rgba(35, 27, 45, 0.88);
+
+  --text-normal: #f5eaf4;
+  --text-muted: #c4aec7;
+  --header-primary: #fff4fb;
+  --header-secondary: #d9c3dc;
+  --interactive-normal: #ddc8e2;
+  --interactive-hover: #fff0fb;
+  --interactive-active: #ffffff;
+  --brand-experiment: #d58acb;
+  --brand-experiment-560: #bd70b4;
+  --brand-experiment-600: #a95e9f;
+  --scrollbar-thin-thumb: #b978b0;
+  --scrollbar-auto-thumb: #b978b0;
+  --scrollbar-auto-track: rgba(20, 12, 25, 0.45);
+}
+
+/* Wallpaper layer */
+html,
+body,
+#app-mount {
+  background: transparent !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 10, 22, 0.36), rgba(15, 10, 22, 0.58)),
+    var(--chewy-wallpaper);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Make the main Discord surfaces translucent so the wallpaper shows through. */
+[class*="app_"],
+[class*="bg_"],
+[class*="guilds_"],
+[class*="sidebar_"],
+[class*="chat_"],
+[class*="members_"],
+[class*="container_"][class*="themed_"] {
+  background-color: transparent !important;
+}
+
+[class*="sidebar_"],
+[class*="chat_"],
+[class*="members_"] {
+  background: rgba(20, 15, 28, 0.42) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Rounded, softly tinted message composer and panels. */
+[class*="channelTextArea_"],
+[class*="scrollableContainer_"],
+[class*="content_"][class*="container_"] {
+  border-radius: 14px !important;
+}
+
+[class*="channelTextArea_"] {
+  background: rgba(37, 27, 45, 0.88) !important;
+}
+
+/* Chewy typography */
+:where(#app-mount, #app-mount *) {
+  font-family: var(--chewy-font) !important;
+}
+
+/* Accent details */
+[class*="message_"]:hover {
+  background: rgba(213, 138, 203, 0.08) !important;
+}
+
+[class*="modeSelected_"] [class*="name_"],
+[class*="selected_"] [class*="name_"] {
+  color: #ffe5fa !important;
+}
+
+::selection {
+  background: rgba(213, 138, 203, 0.45);
+}
+
+/* Keep dialogs readable above the wallpaper. */
+[class*="layer_"] [class*="root_"],
+[class*="modal_"],
+[class*="popout_"] {
+  background-color: rgba(27, 20, 36, 0.97) !important;
+}
