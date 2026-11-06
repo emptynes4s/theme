@@ -40,25 +40,24 @@
   --scrollbar-auto-track: rgba(20, 12, 25, 0.45);
 }
 
-/* Wallpaper layer */
+/* Full-screen wallpaper: fills the entire Discord viewport. */
 html,
 body,
 #app-mount {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
   background: transparent !important;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
+body {
   background-image:
-    linear-gradient(rgba(15, 10, 22, 0.36), rgba(15, 10, 22, 0.58)),
-    var(--chewy-wallpaper);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    linear-gradient(rgba(15, 10, 22, 0.30), rgba(15, 10, 22, 0.48)),
+    var(--chewy-wallpaper) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
 }
 
 /* Make the main Discord surfaces translucent so the wallpaper shows through. */
@@ -114,4 +113,12 @@ body::before {
 [class*="modal_"],
 [class*="popout_"] {
   background-color: rgba(27, 20, 36, 0.97) !important;
+}
+
+
+/* Keep the full-bleed wallpaper visible across the whole app window. */
+#app-mount,
+[class*="app_"],
+[class*="bg_"] {
+  background-color: transparent !important;
 }
